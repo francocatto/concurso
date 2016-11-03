@@ -1,4 +1,4 @@
-package concurso;
+package br.edu.ifms;
 
 import junit.framework.Test;
 import junit.framework.TestCase;
