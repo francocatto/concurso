@@ -11,14 +11,18 @@ public class ListaLigada implements Lista {
     private int tamanho = 0;
 
     public void adiciona(Object elemento) {
-        Celula nova = new Celula(elemento);
         if (tamanho == 0) {
             adicionaNoComeco(elemento);
         } else {
-            ultima.setProxima(nova);
-            ultima = nova;
-            tamanho++;
+            adicionaNoFim(elemento);
         }
+    }
+
+    private void adicionaNoFim(Object elemento) {
+        Celula nova = new Celula(elemento);
+        ultima.setProxima(nova);
+        ultima = nova;
+        tamanho++;
     }
 
     public void adicionaNoComeco(Object elemento){
@@ -67,7 +71,7 @@ public class ListaLigada implements Lista {
         if (posicao == 0){
             removeDoComeco();
         } else if (posicao == tamanho -1) {
-            removeDoFim();
+            remove();
         } else {
             Celula anterior = pegaCelula(posicao - 1);
             Celula atual = anterior.getProxima();
@@ -77,12 +81,12 @@ public class ListaLigada implements Lista {
         this.tamanho--;
     }
 
-    private void removeDoFim(){
+    public void remove(){
         ultima = pegaCelula(tamanho -2);
         ultima.setProxima(null);
     }
 
-    private void removeDoComeco() {
+    public void removeDoComeco() {
         if (tamanho == 1) {
             this.primeira = null;
             this.ultima = null;

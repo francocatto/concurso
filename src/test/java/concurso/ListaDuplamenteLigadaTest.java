@@ -1,5 +1,6 @@
 package concurso;
 
+import modelo.Aluno;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -44,9 +45,9 @@ public class ListaDuplamenteLigadaTest {
         Assert.assertEquals(henrique, listaLigada.pega(2));
     }
 
-    /*@Test
+    @Test
     public void deveRemoverDoComeco(){
-        ListaLigada listaLigada = new ListaLigada();
+        ListaDuplamenteLigada listaLigada = new ListaDuplamenteLigada();
         Aluno henrique = new Aluno(2L, "Henrique");
         Aluno franco = new Aluno(0L, "Franco");
         Aluno gabriel = new Aluno(1L, "Gabriel");
@@ -60,7 +61,7 @@ public class ListaDuplamenteLigadaTest {
 
     @Test
     public void deveRemoverDeQualquerPosicao(){
-        ListaLigada listaLigada = new ListaLigada();
+        ListaDuplamenteLigada listaLigada = new ListaDuplamenteLigada();
         Aluno henrique = new Aluno(2L, "Henrique");
         Aluno franco = new Aluno(0L, "Franco");
         Aluno gabriel = new Aluno(1L, "Gabriel");
@@ -74,7 +75,7 @@ public class ListaDuplamenteLigadaTest {
 
     @Test(expected = IllegalArgumentException.class)
     public void deveRemoverDoFim(){
-        ListaLigada listaLigada = new ListaLigada();
+        ListaDuplamenteLigada listaLigada = new ListaDuplamenteLigada();
         Aluno henrique = new Aluno(2L, "Henrique");
         Aluno franco = new Aluno(0L, "Franco");
         Aluno gabriel = new Aluno(1L, "Gabriel");
@@ -85,5 +86,5 @@ public class ListaDuplamenteLigadaTest {
         Assert.assertEquals(franco, listaLigada.pega(0));
         Assert.assertEquals(gabriel, listaLigada.pega(1));
         listaLigada.pega(2);
-    }*/
+    }
 }
