@@ -15,44 +15,35 @@ public class ListaDuplamenteLigada implements Lista {
         if (tamanho == 0){
             adicionaPrimeiroElemento(elemento);
         } else {
-            adicionaFim(elemento);
+            adicionaNoFim(elemento);
         }
     }
 
     private void adicionaPrimeiroElemento(Object elemento) {
-        this.primeira = new CelulaDupla(elemento);
-        this.ultima = this.primeira;
+        this.ultima = this.primeira = new CelulaDupla(elemento);
         tamanho++;
     }
 
-    private void adicionaFim(Object elemento) {
+    private void adicionaNoFim(Object elemento) {
         CelulaDupla nova = new CelulaDupla(elemento);
-        CelulaDupla anterior = this.ultima;
-        nova.setAnterior(anterior);
-        anterior.setProxima(nova);
+        nova.setAnterior(this.ultima);
+        this.ultima.setProxima(nova);
         this.ultima = nova;
         tamanho++;
     }
 
     public void adiciona(int posicao, Object elemento) {
-        if (tamanho == 0){
-            adicionaPrimeiroElemento(elemento);
-        } else if(posicao == tamanho){
-            adicionaFim(elemento);
+        if (tamanho == 0 || posicao == 0){
+            adicionaNoComeco(elemento);
+        } else if(posicao == tamanho) {
+            adicionaNoFim(elemento);
         } else {
-            /*CelulaDupla nova = new CelulaDupla(elemento);
-            CelulaDupla atual = pegaCelula(posicao);
-            CelulaDupla anteriorDaAtual = atual.getAnterior();
-            nova.setProxima(atual);
-            atual.setAnterior(nova);
-            nova.setAnterior(anteriorDaAtual);
-            this.tamanho++;*/
             CelulaDupla anterior = this.pegaCelula(posicao - 1);
-            CelulaDupla proxima = anterior.getProxima();
-            CelulaDupla nova = new CelulaDupla(elemento, anterior.getProxima());
+            CelulaDupla atual = anterior.getProxima();
+            CelulaDupla nova = new CelulaDupla(elemento, atual);
             nova.setAnterior(anterior);
             anterior.setProxima(nova);
-            proxima.setAnterior(nova);
+            atual.setAnterior(nova);
             this.tamanho++;
         }
 
@@ -62,26 +53,63 @@ public class ListaDuplamenteLigada implements Lista {
         if (tamanho == 0)
             adicionaPrimeiroElemento(elemento);
         else {
-            CelulaDupla nova = new CelulaDupla(elemento);
-            nova.setProxima(this.primeira);
+            CelulaDupla nova = new CelulaDupla(elemento, this.primeira);
+            this.primeira.setAnterior(nova);
             this.primeira = nova;
+            this.tamanho++;
         }
     }
 
-    public Object pega(int posicao) {
+    public Object pega(int posicao) throws IllegalArgumentException {
         return pegaCelula(posicao).getElemento();
     }
 
     private CelulaDupla pegaCelula(int posicao) {
+        if(!this.posicaoOcupada(posicao)){
+            throw new IllegalArgumentException("Posição não existe");
+        }
         CelulaDupla atual = this.primeira;
-        for (int i=0; i <= posicao; i++){
+        for (int i=0; i < posicao; i++){
             atual = atual.getProxima();
         }
         return atual;
     }
 
-    public void remove(int posicao) {
+    private boolean posicaoOcupada(int posicao){
+        return posicao >= 0 && posicao < this.tamanho;
+    }
 
+    public void remove(int posicao) {
+        if(!this.posicaoOcupada(posicao)){
+            throw new IllegalArgumentException("Posição não existe");
+        }
+        if (posicao == 0) {
+            removeDoComeco();
+        }
+        // Diferencial da duplamente ligada está aqui, pois remover o ultimo elemento é O(1)
+        else if (posicao == tamanho -1) {
+            remove();
+        }
+        else {
+            CelulaDupla atual = pegaCelula(posicao);
+            CelulaDupla anterior = atual.getAnterior();
+            CelulaDupla proxima = atual.getProxima();
+            anterior.setProxima(proxima);
+            proxima.setAnterior(anterior);
+        }
+        tamanho--;
+    }
+
+    public void removeDoComeco() {
+        CelulaDupla segunda = this.primeira.getProxima();
+        segunda.setAnterior(null);
+        this.primeira = segunda;
+    }
+
+    public void remove() {
+        CelulaDupla penultima = this.ultima.getAnterior();
+        penultima.setProxima(null);
+        this.ultima = penultima;
     }
 
     public int tamanho() {

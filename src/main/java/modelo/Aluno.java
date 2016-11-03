@@ -1,4 +1,4 @@
-package concurso;
+package modelo;
 
 /**
  * Created by fc on 26/10/16.
