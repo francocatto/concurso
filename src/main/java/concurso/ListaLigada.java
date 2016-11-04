@@ -77,13 +77,17 @@ public class ListaLigada implements Lista {
             Celula atual = anterior.getProxima();
             Celula posterior = atual.getProxima();
             anterior.setProxima(posterior);
+            this.tamanho--;
         }
-        this.tamanho--;
     }
 
     public void remove(){
-        ultima = pegaCelula(tamanho -2);
-        ultima.setProxima(null);
+        if (tamanho >1 ) {
+            ultima = pegaCelula(tamanho - 2);
+            ultima.setProxima(null);
+            this.tamanho--;
+        }else
+            removeDoComeco();
     }
 
     public void removeDoComeco() {
@@ -94,10 +98,11 @@ public class ListaLigada implements Lista {
             this.primeira = this.primeira.getProxima();
             this.ultima = this.primeira.getProxima();
         }
+        this.tamanho--;
     }
 
     public int tamanho() {
-        return 0;
+        return tamanho;
     }
 
     public boolean contem(Object elemento) {

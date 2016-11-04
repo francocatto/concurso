@@ -96,28 +96,50 @@ public class ListaDuplamenteLigada implements Lista {
             CelulaDupla proxima = atual.getProxima();
             anterior.setProxima(proxima);
             proxima.setAnterior(anterior);
+            tamanho--;
         }
-        tamanho--;
     }
 
     public void removeDoComeco() {
         CelulaDupla segunda = this.primeira.getProxima();
         segunda.setAnterior(null);
         this.primeira = segunda;
+        tamanho--;
     }
 
     public void remove() {
         CelulaDupla penultima = this.ultima.getAnterior();
-        penultima.setProxima(null);
-        this.ultima = penultima;
+        if (penultima != null) {
+            penultima.setProxima(null);
+            this.ultima = penultima;
+    }
+    tamanho--;
     }
 
     public int tamanho() {
-        return 0;
+        return tamanho;
     }
 
     public boolean contem(Object o) {
         return false;
     }
 
+    public String toString() {
+        // Verificando se a Lista está vazia
+        if(this.tamanho == 0){
+            return "[]";
+        }
+        StringBuilder builder = new StringBuilder("[");
+        CelulaDupla atual = primeira;
+        // Percorrendo até o penúltimo elemento.
+        while (atual.getProxima() != null) {
+            builder.append(atual.getElemento());
+            builder.append(", ");
+            atual = atual.getProxima();
+        }
+        // último elemento
+        builder.append(atual.getElemento());
+        builder.append("]");
+        return builder.toString();
+    }
 }

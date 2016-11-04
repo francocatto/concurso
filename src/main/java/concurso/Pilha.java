@@ -3,11 +3,11 @@ package concurso;
 /**
  * Created by fc on 03/11/16.
  */
-public interface Pilha {
+public interface Pilha<T> {
 
-    public void insere(Object elemento);
+    public void insere(T elemento);
 
     public boolean vazia();
 
-    public void remove();
+    public T remove();
 }
