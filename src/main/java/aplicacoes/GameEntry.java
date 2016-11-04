@@ -1,4 +1,4 @@
-package br.edu.ifms;
+package aplicacoes;
 
 /**
  * Created by fc on 15/10/16.

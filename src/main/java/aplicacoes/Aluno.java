@@ -1,4 +1,4 @@
-package modelo;
+package aplicacoes;
 
 /**
  * Created by fc on 26/10/16.

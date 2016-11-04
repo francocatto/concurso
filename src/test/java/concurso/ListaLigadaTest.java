@@ -1,6 +1,6 @@
 package concurso;
 
-import modelo.Aluno;
+import aplicacoes.Aluno;
 import org.junit.Assert;
 import org.junit.Test;
 

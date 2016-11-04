@@ -1,5 +1,7 @@
-package br.edu.ifms;
+package concurso;
 
+import aplicacoes.GameEntry;
+import aplicacoes.Scoreboard;
 import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
@@ -58,7 +60,8 @@ public class ScoreboardTest extends TestCase
     public void testShouldRemoveSecondELement()
     {
         GameEntry entryJohn = new GameEntry();
-        entryJohn.setName("John");
+        entryJohn.
+                setName("John");
         entryJohn.setScore(20);
 
         GameEntry entryJoshua = new GameEntry();
