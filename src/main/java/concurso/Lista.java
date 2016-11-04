@@ -3,15 +3,15 @@ package concurso;
 /**
  * Created by fc on 26/10/16.
  */
-public interface Lista {
+public interface Lista<T> {
 
-    public void adiciona(Object elemento);
-    public void adiciona(int posicao, Object elemento);
-    public void adicionaNoComeco(Object elemento);
-    public Object pega(int posicao);
-    public void remove(int posicao);
-    public void removeDoComeco();
-    public void remove();
+    public void adiciona(T elemento);
+    public void adiciona(int posicao, T elemento);
+    public void adicionaNoComeco(T elemento);
+    public T pega(int posicao);
+    public T remove(int posicao);
+    public T removeDoComeco();
+    public T remove();
     public int tamanho();
-    public boolean contem(Object o);
+    public boolean contem(T o);
 }

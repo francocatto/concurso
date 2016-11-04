@@ -7,7 +7,7 @@ import java.util.LinkedList;
  */
 public class PilhaImpl<T> implements Pilha<T> {
 
-    private Lista lista = new ListaLigada();
+    private Lista<T> lista = new ListaLigada<T>();
 
     //private LinkedList<T> lista = new LinkedList<T>();
 
@@ -24,9 +24,7 @@ public class PilhaImpl<T> implements Pilha<T> {
     }
 
     public T remove() {
-        Object elemento = lista.pega(lista.tamanho()-1);
-        lista.remove();
-        return (T) elemento;
+        return lista.remove();
         //return lista.remove(lista.size()-1);
     }
 }

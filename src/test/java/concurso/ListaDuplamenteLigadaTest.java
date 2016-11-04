@@ -11,7 +11,7 @@ public class ListaDuplamenteLigadaTest {
 
     @Test
     public void adicionaNoFim(){
-        ListaDuplamenteLigada listaLigada = new ListaDuplamenteLigada();
+        ListaDuplamenteLigada<Aluno> listaLigada = new ListaDuplamenteLigada<Aluno>();
         Aluno franco = new Aluno(0L, "Franco");
         Aluno gabriel = new Aluno(1L, "Gabriel");
         listaLigada.adiciona(franco);

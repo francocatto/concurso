@@ -1,4 +1,4 @@
-package br.edu.ifms;
+package concurso;
 
 import org.junit.Assert;
 import org.junit.Rule;
@@ -15,24 +15,24 @@ public class VetorTeste {
 
     @Test
     public void deveInserirElementoNaListaEDeslocarParaDireita() {
-        VetorImpl vetor = new VetorImpl(8);
+        VetorImpl<Character> vetor = new VetorImpl<Character>(8);
         Character data[] = {'A', 'B', 'C', 'D', 'E'};
         vetor.inicializa(data);
         vetor.adicionar(3, 'X');
-        Assert.assertEquals('X', vetor.pega(3));
-        Assert.assertEquals('C', vetor.pega(4));
-        Assert.assertEquals('D', vetor.pega(5));
-        Assert.assertEquals('E', vetor.pega(6));
+        Assert.assertEquals('X', (char) vetor.pega(3));
+        Assert.assertEquals('C', (char) vetor.pega(4));
+        Assert.assertEquals('D', (char) vetor.pega(5));
+        Assert.assertEquals('E', (char) vetor.pega(6));
     }
 
     @Test
     public void deveRemoverElementoDaListaEDeslocarParaEsquerda() {
-        VetorImpl vetor = new VetorImpl(8);
+        VetorImpl<Character> vetor = new VetorImpl(8);
         Character data[] = {'A', 'B', 'C', 'D', 'E'};
         vetor.inicializa(data);
         vetor.remover(3);
-        Assert.assertEquals('D', vetor.pega(3));
-        Assert.assertEquals('E', vetor.pega(4));
+        Assert.assertEquals('D', (char) vetor.pega(3));
+        Assert.assertEquals('E', (char) vetor.pega(4));
         exception.expect(IllegalArgumentException.class);
         vetor.pega(5);
     }

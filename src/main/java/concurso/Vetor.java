@@ -1,22 +1,22 @@
-package br.edu.ifms;
+package concurso;
 
 /**
  * Created by fc on 17/10/16.
  */
-public interface Vetor {
-    void adicionar(Object elemento);
+public interface Vetor<T> {
+    void adicionar(T elemento);
 
     void remover();
 
-    boolean contem(Object elemento);
+    boolean contem(T elemento);
 
-    void adicionar(int posicao, Object elemento);
+    void adicionar(int posicao, T elemento);
 
     void remover(int posicao);
 
     int getTotal();
 
-    Object pega(int posicao);
+    T pega(int posicao);
 
     String toString();
 }

@@ -3,10 +3,10 @@ package concurso;
 /**
  * Created by fc on 26/10/16.
  */
-public class ListaLigada implements Lista {
+public class ListaLigada<T> implements Lista<T> {
 
-    private Celula primeira;
-    private Celula ultima;
+    private Celula<T> primeira;
+    private Celula<T> ultima;
 
     private int tamanho = 0;
 
@@ -19,14 +19,14 @@ public class ListaLigada implements Lista {
     }
 
     private void adicionaNoFim(Object elemento) {
-        Celula nova = new Celula(elemento);
+        Celula<T> nova = new Celula(elemento);
         ultima.setProxima(nova);
         ultima = nova;
         tamanho++;
     }
 
     public void adicionaNoComeco(Object elemento){
-        Celula nova = new Celula(elemento, primeira);
+        Celula<T> nova = new Celula(elemento, primeira);
         this.primeira = nova;
         if (tamanho == 0)
             this.ultima = this.primeira;
@@ -39,8 +39,8 @@ public class ListaLigada implements Lista {
         } else if(posicao == this.tamanho){
             this.adiciona(elemento);
         } else {
-            Celula anterior = this.pegaCelula(posicao -1);
-            Celula nova = new Celula(elemento, anterior.getProxima());
+            Celula<T> anterior = this.pegaCelula(posicao -1);
+            Celula<T> nova = new Celula(elemento, anterior.getProxima());
             anterior.setProxima(nova);
             tamanho++;
         }
@@ -51,11 +51,11 @@ public class ListaLigada implements Lista {
     }
 
     // LINEAR TIME
-    private Celula pegaCelula(int posicao) {
+    private Celula<T> pegaCelula(int posicao) {
         if(!this.posicaoOcupada(posicao)){
             throw new IllegalArgumentException("Posição não existe");
         }
-        Celula atual = primeira;
+        Celula<T> atual = primeira;
         for (int i = 0; i < posicao; i++) {
             atual = atual.getProxima();
         }
@@ -63,42 +63,49 @@ public class ListaLigada implements Lista {
     }
 
     // LINEAR TIME
-    public Object pega(int posicao) {
+    public T pega(int posicao) {
         return pegaCelula(posicao).getElemento();
     }
 
-    public void remove(int posicao) {
+    public T remove(int posicao) {
         if (posicao == 0){
-            removeDoComeco();
+            return removeDoComeco();
         } else if (posicao == tamanho -1) {
-            remove();
+            return remove();
         } else {
-            Celula anterior = pegaCelula(posicao - 1);
-            Celula atual = anterior.getProxima();
-            Celula posterior = atual.getProxima();
+            Celula<T> anterior = pegaCelula(posicao - 1);
+            Celula<T> atual = anterior.getProxima();
+            Celula<T> posterior = atual.getProxima();
             anterior.setProxima(posterior);
             this.tamanho--;
+            return atual.getElemento();
         }
     }
 
-    public void remove(){
+    public T remove(){
         if (tamanho >1 ) {
-            ultima = pegaCelula(tamanho - 2);
-            ultima.setProxima(null);
+            Celula<T> penultima = pegaCelula(tamanho - 2);
+            Celula<T> ultima = this.ultima;
+            this.ultima = penultima;
+            this.ultima.setProxima(null);
             this.tamanho--;
-        }else
-            removeDoComeco();
+            return ultima.getElemento();
+        } else
+            return removeDoComeco();
+
     }
 
-    public void removeDoComeco() {
+    public T removeDoComeco() {
+        Celula<T> primeira = this.primeira;
         if (tamanho == 1) {
             this.primeira = null;
             this.ultima = null;
-        }else {
+        } else {
             this.primeira = this.primeira.getProxima();
             this.ultima = this.primeira.getProxima();
         }
         this.tamanho--;
+        return primeira.getElemento();
     }
 
     public int tamanho() {
@@ -106,7 +113,7 @@ public class ListaLigada implements Lista {
     }
 
     public boolean contem(Object elemento) {
-        Celula atual = this.primeira;
+        Celula<T> atual = this.primeira;
         while (atual != null) {
             if (atual.getElemento().equals(elemento)) {
                 return true;
@@ -122,7 +129,7 @@ public class ListaLigada implements Lista {
             return "[]";
         }
         StringBuilder builder = new StringBuilder("[");
-        Celula atual = primeira;
+        Celula<T> atual = primeira;
         // Percorrendo até o penúltimo elemento.
         while (atual.getProxima() != null) {
             builder.append(atual.getElemento());

@@ -1,11 +1,11 @@
-package br.edu.ifms;
+package concurso;
 
 import java.util.Arrays;
 
 /**
  * Created by fc on 17/10/16.
  */
-public class VetorImpl implements Vetor {
+public class VetorImpl<T> implements Vetor<T> {
 
 
     private int total = 0;
@@ -13,10 +13,11 @@ public class VetorImpl implements Vetor {
     private Object[] elementos;
 
     public VetorImpl(int capacity) {
+
         elementos = new Object[capacity];
     }
 
-    public void adicionar(Object elemento) {
+    public void adicionar(T elemento) {
         elementos[total] = elemento;
         total++;
     }
@@ -26,14 +27,14 @@ public class VetorImpl implements Vetor {
         total--;
     }
 
-    public boolean contem(Object elemento){
+    public boolean contem(T elemento){
         for (int i=0; i < total; i++)
             if (elemento.equals(elementos[i]))
                 return true;
         return false;
     }
 
-    public void adicionar(int posicao, Object elemento){
+    public void adicionar(int posicao, T elemento){
         posicao--;
         deslocarParaDireita(posicao);
         this.elementos[posicao] = elemento;
@@ -62,11 +63,11 @@ public class VetorImpl implements Vetor {
         return total;
     }
 
-    public Object pega(int posicao) {
+    public T pega(int posicao) {
         if (!this.posicaoOcupada(posicao)) {
             throw new IllegalArgumentException("Posição inválida");
         }
-        return elementos[posicao - 1];
+        return (T) elementos[posicao - 1];
     }
 
     private boolean posicaoOcupada(int posicao) {
@@ -78,8 +79,8 @@ public class VetorImpl implements Vetor {
         return Arrays.toString(elementos);
     }
 
-    public void inicializa(Object[] elementos){
-        for (Object elemento : elementos) {
+    public void inicializa(T[] elementos){
+        for (T elemento : elementos) {
             adicionar(elemento);
         }
     }

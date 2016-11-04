@@ -3,44 +3,44 @@ package concurso;
 /**
  * Created by fc on 26/10/16.
  */
-public class CelulaDupla {
+public class CelulaDupla<T> {
 
-    private Object elemento;
+    private T elemento;
 
-    private CelulaDupla proxima;
+    private CelulaDupla<T> proxima;
 
-    private CelulaDupla anterior;
+    private CelulaDupla<T> anterior;
 
-    public CelulaDupla(Object elemento) {
+    public CelulaDupla(T elemento) {
         this.elemento = elemento;
     }
 
-    public CelulaDupla(Object elemento, CelulaDupla proxima) {
+    public CelulaDupla(T elemento, CelulaDupla<T> proxima) {
         this.elemento = elemento;
         this.proxima = proxima;
     }
 
-    public Object getElemento() {
+    public T getElemento() {
         return elemento;
     }
 
-    public void setElemento(Object elemento) {
+    public void setElemento(T elemento) {
         this.elemento = elemento;
     }
 
-    public CelulaDupla getProxima() {
+    public CelulaDupla<T> getProxima() {
         return proxima;
     }
 
-    public void setProxima(CelulaDupla proxima) {
+    public void setProxima(CelulaDupla<T> proxima) {
         this.proxima = proxima;
     }
 
-    public CelulaDupla getAnterior() {
+    public CelulaDupla<T> getAnterior() {
         return anterior;
     }
 
-    public void setAnterior(CelulaDupla anterior) {
+    public void setAnterior(CelulaDupla<T> anterior) {
         this.anterior = anterior;
     }
 
