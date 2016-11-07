@@ -20,9 +20,9 @@ public class VetorTeste {
         vetor.inicializa(data);
         vetor.adicionar(3, 'X');
         Assert.assertEquals('X', (char) vetor.pega(3));
-        Assert.assertEquals('C', (char) vetor.pega(4));
-        Assert.assertEquals('D', (char) vetor.pega(5));
-        Assert.assertEquals('E', (char) vetor.pega(6));
+        Assert.assertEquals('C', (char) vetor.pega(2));
+        Assert.assertEquals('D', (char) vetor.pega(4));
+        Assert.assertEquals('E', (char) vetor.pega(5));
     }
 
     @Test
@@ -31,9 +31,8 @@ public class VetorTeste {
         Character data[] = {'A', 'B', 'C', 'D', 'E'};
         vetor.inicializa(data);
         vetor.remover(3);
-        Assert.assertEquals('D', (char) vetor.pega(3));
-        Assert.assertEquals('E', (char) vetor.pega(4));
+        Assert.assertEquals('E', (char) vetor.pega(3));
         exception.expect(IllegalArgumentException.class);
-        vetor.pega(5);
+        vetor.pega(4);
     }
 }

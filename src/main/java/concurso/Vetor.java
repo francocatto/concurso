@@ -19,4 +19,6 @@ public interface Vetor<T> {
     T pega(int posicao);
 
     String toString();
+
+    public void clear();
 }

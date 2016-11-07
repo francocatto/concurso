@@ -1,5 +1,7 @@
 package concurso;
 
+import java.util.*;
+
 /**
  * Created by fc on 26/10/16.
  */
@@ -12,7 +14,7 @@ public class ListaDuplamenteLigada<T> implements Lista<T> {
 
 
     public void adiciona(T elemento) {
-        if (tamanho == 0){
+        if (tamanho == 0) {
             adicionaPrimeiroElemento(elemento);
         } else {
             adicionaNoFim(elemento);
@@ -33,9 +35,9 @@ public class ListaDuplamenteLigada<T> implements Lista<T> {
     }
 
     public void adiciona(int posicao, T elemento) {
-        if (tamanho == 0 || posicao == 0){
+        if (tamanho == 0 || posicao == 0) {
             adicionaNoComeco(elemento);
-        } else if(posicao == tamanho) {
+        } else if (posicao == tamanho) {
             adicionaNoFim(elemento);
         } else {
             CelulaDupla anterior = this.pegaCelula(posicao - 1);
@@ -60,37 +62,37 @@ public class ListaDuplamenteLigada<T> implements Lista<T> {
         }
     }
 
-    public T pega(int posicao) throws IllegalArgumentException {
+    public T
+    pega(int posicao) throws IllegalArgumentException {
         return pegaCelula(posicao).getElemento();
     }
 
     private CelulaDupla<T> pegaCelula(int posicao) {
-        if(!this.posicaoOcupada(posicao)){
+        if (!this.posicaoOcupada(posicao)) {
             throw new IllegalArgumentException("Posição não existe");
         }
         CelulaDupla<T> atual = this.primeira;
-        for (int i=0; i < posicao; i++){
+        for (int i = 0; i < posicao; i++) {
             atual = atual.getProxima();
         }
         return atual;
     }
 
-    private boolean posicaoOcupada(int posicao){
+    private boolean posicaoOcupada(int posicao) {
         return posicao >= 0 && posicao < this.tamanho;
     }
 
     public T remove(int posicao) {
-        if(!this.posicaoOcupada(posicao)){
+        if (!this.posicaoOcupada(posicao)) {
             throw new IllegalArgumentException("Posição não existe");
         }
         if (posicao == 0) {
             return removeDoComeco();
         }
         // Diferencial da duplamente ligada está aqui, pois remover o ultimo elemento é O(1)
-        else if (posicao == tamanho -1) {
+        else if (posicao == tamanho - 1) {
             return remove();
-        }
-        else {
+        } else {
             CelulaDupla<T> atual = pegaCelula(posicao);
             CelulaDupla<T> anterior = atual.getAnterior();
             CelulaDupla<T> proxima = atual.getProxima();
@@ -126,17 +128,67 @@ public class ListaDuplamenteLigada<T> implements Lista<T> {
         return ultima.getElemento();
     }
 
+    public boolean remove(T elemento) {
+        if (elemento != null) {
+            for (CelulaDupla<T> x = primeira; x != null; x = x.getProxima()) {
+                if (elemento.equals(x.getElemento())) {
+                    unlink(x);
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    T unlink(CelulaDupla<T> x) {
+        // assert x != null;
+        final T element = x.getElemento();
+        final CelulaDupla<T> next = x.getProxima();
+        final CelulaDupla<T> prev = x.getAnterior();
+
+        if (prev == null) {
+            primeira = next;
+        } else {
+            prev.setProxima(next);
+            x.setProxima(null);
+        }
+
+        if (next == null) {
+            ultima = prev;
+        } else {
+            next.setAnterior(prev);
+            x.setProxima(null);
+        }
+
+        x.setElemento(null);
+        tamanho--;
+        return element;
+    }
+
     public int tamanho() {
         return tamanho;
     }
 
+    public void adicionarTodos(Lista<T> lista) {
+        for (int i = 0; i <= lista.tamanho() - 1; i++) {
+            T elemento = lista.pega(i);
+            adiciona(elemento);
+        }
+
+    }
+
     public boolean contem(Object o) {
+        for (CelulaDupla<T> x = primeira; x != null; x = x.getProxima()) {
+            if (o.equals(x.getElemento())) {
+                return true;
+            }
+        }
         return false;
     }
 
     public String toString() {
         // Verificando se a Lista está vazia
-        if(this.tamanho == 0){
+        if (this.tamanho == 0) {
             return "[]";
         }
         StringBuilder builder = new StringBuilder("[");
@@ -151,5 +203,25 @@ public class ListaDuplamenteLigada<T> implements Lista<T> {
         builder.append(atual.getElemento());
         builder.append("]");
         return builder.toString();
+    }
+
+    public Iterator<T> iterator() {
+        return new ListaDuplamenteLigadaIterator();
+    }
+
+    private class ListaDuplamenteLigadaIterator implements Iterator {
+        int cursor =0;
+        public boolean hasNext() {
+            return cursor < tamanho;
+        }
+
+        public T next() {
+            return pega(cursor++);
+        }
+
+        public void remove() {
+
+        }
+
     }
 }

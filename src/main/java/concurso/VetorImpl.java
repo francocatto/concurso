@@ -10,11 +10,19 @@ public class VetorImpl<T> implements Vetor<T> {
 
     private int total = 0;
 
+    private static final int CAPACIDADE_PADRAO = 10;
+
     private Object[] elementos;
 
-    public VetorImpl(int capacity) {
+    public VetorImpl() {
+        elementos = new Object[CAPACIDADE_PADRAO];
+    }
 
-        elementos = new Object[capacity];
+    public VetorImpl(int capacity) {
+        if (capacity == 0)
+            elementos = new Object[CAPACIDADE_PADRAO];
+        else
+            elementos = new Object[capacity];
     }
 
     public void adicionar(T elemento) {
@@ -35,14 +43,12 @@ public class VetorImpl<T> implements Vetor<T> {
     }
 
     public void adicionar(int posicao, T elemento){
-        posicao--;
         deslocarParaDireita(posicao);
         this.elementos[posicao] = elemento;
         total++;
     }
 
     public void remover(int posicao){
-        posicao--;
         deslocarParaEsquerda(posicao);
         this.elementos[total-1]=null;
         total--;
@@ -67,11 +73,10 @@ public class VetorImpl<T> implements Vetor<T> {
         if (!this.posicaoOcupada(posicao)) {
             throw new IllegalArgumentException("Posição inválida");
         }
-        return (T) elementos[posicao - 1];
+        return (T) elementos[posicao];
     }
 
     private boolean posicaoOcupada(int posicao) {
-        posicao--;
         return posicao >= 0 && posicao < this.total;
     }
 
@@ -84,5 +89,12 @@ public class VetorImpl<T> implements Vetor<T> {
             adicionar(elemento);
         }
     }
+    public void clear() {
+        // clear to let GC do its work
+        for (int i = 0; i < elementos.length; i++)
+            elementos[i] = null;
+        total = 0;
+    }
+
 
 }

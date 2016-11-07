@@ -13,7 +13,7 @@ public interface Conjunto<T> {
 
     public boolean contem(T elemento);
 
-    public List<T> pegaTodos();
+    public Lista<T> pegaTodos();
 
     public int tamanho();
 }

@@ -15,17 +15,24 @@ public class ConjuntoEspalhamentoTest {
 
         conjunto.adiciona("palavra");
         conjunto.adiciona("computador");
-        conjunto.adiciona("apostila");
+        String apostila = "apostila";
+        conjunto.adiciona(apostila);
         conjunto.adiciona("instrutor");
         conjunto.adiciona("mesa");
         conjunto.adiciona("telefone");
 
-        Assert.assertTrue(conjunto.contem("apostila"));
+        Assert.assertTrue(conjunto.contem(apostila));
 
-        conjunto.remove("apostila");
+        conjunto.remove(apostila);
 
-        Assert.assertFalse(conjunto.contem("apostila"));
+        Assert.assertFalse(conjunto.contem(apostila));
 
         Assert.assertEquals(5, conjunto.tamanho());
+
+        Lista<String> palavras = conjunto.pegaTodos();
+
+        for (String palavra : palavras) {
+            System.out.println(palavra);
+        }
     }
 }

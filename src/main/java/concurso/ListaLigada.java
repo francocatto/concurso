@@ -1,5 +1,7 @@
 package concurso;
 
+import java.util.Iterator;
+
 /**
  * Created by fc on 26/10/16.
  */
@@ -95,6 +97,10 @@ public class ListaLigada<T> implements Lista<T> {
 
     }
 
+    public boolean remove(T elemento) {
+        return false;
+    }
+
     public T removeDoComeco() {
         Celula<T> primeira = this.primeira;
         if (tamanho == 1) {
@@ -110,6 +116,14 @@ public class ListaLigada<T> implements Lista<T> {
 
     public int tamanho() {
         return tamanho;
+    }
+
+    public void adicionarTodos(Lista<T> lista) {
+
+    }
+
+    public Iterator<T> iterator() {
+        return null;
     }
 
     public boolean contem(Object elemento) {
