@@ -1,8 +1,5 @@
 package concurso;
 
-import java.util.LinkedList;
-import java.util.List;
-
 /**
  * Created by fc on 04/11/16.
  */
@@ -19,7 +16,7 @@ public class ConjuntoEspalhamento<T> implements Conjunto<T> {
     }
 
     private int calcularIndiceDeEspalhamento(T elemento) {
-        return Math.abs(elemento.hashCode() % this.tabela.getTotal());
+        return Math.abs(elemento.hashCode() % this.tabela.tamanho());
     }
 
     public void adiciona(T elemento) {
@@ -45,9 +42,9 @@ public class ConjuntoEspalhamento<T> implements Conjunto<T> {
         return lista.contem(elemento);
     }
 
-    public Lista<T> pegaTodos() {
+    public Lista<T> pegaTodas() {
         ListaDuplamenteLigada<T> todos = new ListaDuplamenteLigada<T>();
-        for (int i = 0; i < this.tabela.getTotal(); i++) {
+        for (int i = 0; i < this.tabela.tamanho(); i++) {
             todos.adicionarTodos(this.tabela.pega(i));
         }
         return todos;
@@ -58,7 +55,7 @@ public class ConjuntoEspalhamento<T> implements Conjunto<T> {
     }
 
     private void redimensionaTabela(int novaCapacidade){
-        Lista<T> elementos = this.pegaTodos();
+        Lista<T> elementos = this.pegaTodas();
         this.tabela.clear();
 
         for (int i = 0; i < novaCapacidade; i++) {
@@ -71,7 +68,7 @@ public class ConjuntoEspalhamento<T> implements Conjunto<T> {
     }
 
     private void verificaCarga() {
-        int capacidade = this.tabela.getTotal();
+        int capacidade = this.tabela.tamanho();
         double carga = (double) this.tamanho / capacidade;
 
         if (carga > 0.75) {

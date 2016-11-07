@@ -22,14 +22,15 @@ public class ConjuntoEspalhamentoTest {
         conjunto.adiciona("telefone");
 
         Assert.assertTrue(conjunto.contem(apostila));
+        Assert.assertEquals(7, conjunto.tamanho());
 
         conjunto.remove(apostila);
 
         Assert.assertFalse(conjunto.contem(apostila));
 
-        Assert.assertEquals(5, conjunto.tamanho());
+        Assert.assertEquals(6, conjunto.tamanho());
 
-        Lista<String> palavras = conjunto.pegaTodos();
+        Lista<String> palavras = conjunto.pegaTodas();
 
         for (String palavra : palavras) {
             System.out.println(palavra);

@@ -1,19 +1,17 @@
 package concurso;
 
-import java.util.List;
-
 /**
  * Created by fc on 04/11/16.
  */
 public interface Conjunto<T> {
 
-    public void adiciona(T elemento);
+    void adiciona(T elemento);
 
-    public void remove(T elemento);
+    void remove(T elemento);
 
-    public boolean contem(T elemento);
+    boolean contem(T elemento);
 
-    public Lista<T> pegaTodos();
+    Lista<T> pegaTodas();
 
-    public int tamanho();
+    int tamanho();
 }

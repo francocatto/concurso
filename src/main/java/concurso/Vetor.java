@@ -1,9 +1,11 @@
 package concurso;
 
+import java.util.Iterator;
+
 /**
  * Created by fc on 17/10/16.
  */
-public interface Vetor<T> {
+public interface Vetor<T> extends Iterable<T> {
     void adicionar(T elemento);
 
     void remover();
@@ -14,11 +16,13 @@ public interface Vetor<T> {
 
     void remover(int posicao);
 
-    int getTotal();
+    int tamanho();
 
     T pega(int posicao);
 
     String toString();
 
-    public void clear();
+    void clear();
+
+    Iterator<T> iterator();
 }
