@@ -82,7 +82,7 @@ public class ListaCircularTest {
         lista.adiciona(henrique);
         lista.adiciona(0, franco);
         lista.adiciona(1, gabriel);
-        lista.remove(2);
+        Assert.assertEquals(henrique, lista.remove(2));
         Assert.assertEquals(franco, lista.pega(0));
         Assert.assertEquals(gabriel, lista.pega(1));
         lista.pega(2);

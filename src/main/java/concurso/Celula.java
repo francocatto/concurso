@@ -38,7 +38,6 @@ public class Celula<T> {
     public String toString() {
         return "Celula{" +
                 "elemento=" + elemento +
-                ", proxima=" + proxima +
                 '}';
     }
 }

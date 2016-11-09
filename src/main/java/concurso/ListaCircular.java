@@ -29,6 +29,7 @@ public class ListaCircular<T> implements Lista<T> {
             Celula<T> anterior = pegaCelula(posicao - 1);
             Celula<T> atual = anterior.getProxima();
             anterior.setProxima(new Celula<T>(elemento, atual));
+            tamanho++;
         }
     }
 
@@ -45,11 +46,18 @@ public class ListaCircular<T> implements Lista<T> {
     }
 
     private Celula<T> pegaCelula(int posicao) {
+        if (!this.posicaoOcupada(posicao)) {
+            throw new IllegalArgumentException("Posição não existe");
+        }
         Celula<T> atual = ultima.getProxima();
         for (int i = 0; i < posicao; i++) {
             atual = atual.getProxima();
         }
         return atual;
+    }
+
+    private boolean posicaoOcupada(int posicao) {
+        return posicao >= 0 && posicao < this.tamanho;
     }
 
     @Override
@@ -59,7 +67,7 @@ public class ListaCircular<T> implements Lista<T> {
 
     @Override
     public T remove(int posicao) {
-        if (posicao == tamanho)
+        if (posicao == tamanho - 1)
             return remove();
         else if (posicao == 0)
             return removeDoComeco();
@@ -91,14 +99,13 @@ public class ListaCircular<T> implements Lista<T> {
 
     @Override
     public T remove() {
-        Celula<T> penultima = ultima;
+        Celula<T> removido = ultima;
+        Celula<T> penultima = pegaCelula(tamanho - 2);
         Celula<T> primeira = ultima.getProxima();
-        for (int i = 0; i < tamanho - 1; i++) {
-            penultima = penultima.getProxima();
-        }
         penultima.setProxima(primeira);
+        ultima = penultima;
         tamanho--;
-        return penultima.getElemento();
+        return removido.getElemento();
     }
 
     private boolean estaVazio() {
