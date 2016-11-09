@@ -25,7 +25,11 @@ public class ListaCircular<T> implements Lista<T> {
     public void adiciona(int posicao, T elemento) {
         if (posicao == 0)
             adicionaNoComeco(elemento);
-
+        else {
+            Celula<T> anterior = pegaCelula(posicao - 1);
+            Celula<T> atual = anterior.getProxima();
+            anterior.setProxima(new Celula<T>(elemento, atual));
+        }
     }
 
     @Override
@@ -40,14 +44,32 @@ public class ListaCircular<T> implements Lista<T> {
         tamanho++;
     }
 
+    private Celula<T> pegaCelula(int posicao) {
+        Celula<T> atual = ultima.getProxima();
+        for (int i = 0; i < posicao; i++) {
+            atual = atual.getProxima();
+        }
+        return atual;
+    }
+
     @Override
     public T pega(int posicao) {
-        return null;
+        return pegaCelula(posicao).getElemento();
     }
 
     @Override
     public T remove(int posicao) {
-        return null;
+        if (posicao == tamanho)
+            return remove();
+        else if (posicao == 0)
+            return removeDoComeco();
+        else {
+            Celula<T> anterior = pegaCelula(posicao - 1);
+            Celula<T> atual = anterior.getProxima();
+            Celula<T> proxima = atual.getProxima();
+            anterior.setProxima(proxima);
+            return atual.getElemento();
+        }
     }
 
     @Override
@@ -55,16 +77,16 @@ public class ListaCircular<T> implements Lista<T> {
         if (estaVazio())
             return null;
         Celula<T> primeira = ultima.getProxima();
-        Celula<T> ultimaASerExcluida = ultima;
+        Celula<T> excluido = ultima;
         if (primeira == ultima) {
             ultima = null;
         } else {
             Celula<T> proxima = primeira.getProxima();
             ultima.setProxima(proxima);
-            ultimaASerExcluida = proxima;
+            excluido = primeira;
         }
         tamanho--;
-        return ultimaASerExcluida.getElemento();
+        return excluido.getElemento();
     }
 
     @Override

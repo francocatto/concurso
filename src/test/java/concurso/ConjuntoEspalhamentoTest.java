@@ -29,11 +29,5 @@ public class ConjuntoEspalhamentoTest {
         Assert.assertFalse(conjunto.contem(apostila));
 
         Assert.assertEquals(6, conjunto.tamanho());
-
-        Lista<String> palavras = conjunto.pegaTodas();
-
-        for (String palavra : palavras) {
-            System.out.println(palavra);
-        }
     }
 }

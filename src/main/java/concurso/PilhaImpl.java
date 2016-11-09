@@ -1,7 +1,5 @@
 package concurso;
 
-import java.util.LinkedList;
-
 /**
  * Created by fc on 03/11/16.
  */
@@ -20,11 +18,11 @@ public class PilhaImpl<T> implements Pilha<T> {
     public boolean vazia() {
 
         return lista.tamanho() == 0;
-        //return lista.size() == 0;
+        //return lista.tamanho() == 0;
     }
 
     public T remove() {
         return lista.remove();
-        //return lista.remove(lista.size()-1);
+        //return lista.remove(lista.tamanho()-1);
     }
 }

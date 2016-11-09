@@ -33,4 +33,12 @@ public class Celula<T> {
     public void setProxima(Celula<T> proxima) {
         this.proxima = proxima;
     }
+
+    @Override
+    public String toString() {
+        return "Celula{" +
+                "elemento=" + elemento +
+                ", proxima=" + proxima +
+                '}';
+    }
 }
