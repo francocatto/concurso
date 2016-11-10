@@ -21,6 +21,7 @@ public class MapaEspalhamento<K, V> implements Mapa<K, V> {
 
     public void adiciona(K chave, V valor) {
         if (!this.contemChave(chave)) {
+            verificaCarga();
             Associacao<K, V> associacao = new Associacao<K, V>(chave, valor);
             Lista<Associacao<K, V>> associacoes = tabela.pega(calculaIndiceDaTabela(chave));
             associacoes.adiciona(associacao);
@@ -39,6 +40,7 @@ public class MapaEspalhamento<K, V> implements Mapa<K, V> {
     }
 
     public void remove(K chave) {
+        verificaCarga();
         Lista<Associacao<K, V>> associacoes = tabela.pega(calculaIndiceDaTabela(chave));
         for (int i = 0; i < associacoes.tamanho(); i++) {
             Associacao associacao = associacoes.pega(i);

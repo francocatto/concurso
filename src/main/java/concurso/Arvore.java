@@ -17,16 +17,16 @@ public interface Arvore<T> extends Iterable<T> {
     int numeroDeFilhos(Posicao<T> p) throws IllegalArgumentException;
 
     /* métodos de consulta */
-    boolean isInterno(Posicao<T> p) throws IllegalArgumentException;
+    boolean ehInterno(Posicao<T> p) throws IllegalArgumentException;
 
-    boolean isExterno(Posicao<T> p) throws IllegalArgumentException;
+    boolean ehExterno(Posicao<T> p) throws IllegalArgumentException;
 
-    boolean isRaiz(Posicao<T> p) throws IllegalArgumentException;
+    boolean ehRaiz(Posicao<T> p) throws IllegalArgumentException;
 
     /* outros */
     int tamanho();
 
-    boolean isVazio();
+    boolean ehVazio();
 
     Iterator<T> iterator();
 
